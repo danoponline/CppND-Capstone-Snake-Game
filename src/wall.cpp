@@ -33,7 +33,7 @@ void Wall::AddWall()
 
 }
 
-void Wall::AddWall(SDL_Point point){
+void Wall::AddWall(SDL_Point &point){
     wall_bodies.emplace_back(point);
 }
 

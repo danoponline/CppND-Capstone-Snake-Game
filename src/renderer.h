@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <vector>
+#include <memory>
 #include "SDL.h"
 #include "snake.h"
 #include "wall.h"
@@ -16,8 +17,8 @@ class Renderer {
   void UpdateWindowTitle(int score, int fps, SDL_Point &food);
 
  private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+  std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> sdl_window;
+  std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> sdl_renderer;
 
   const std::size_t screen_width;
   const std::size_t screen_height;

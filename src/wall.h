@@ -10,7 +10,7 @@ class Wall
       Wall(std::size_t grid_width, std::size_t grid_height);
       std::vector<SDL_Point> GetWallBodies() const {return wall_bodies;}
       void AddWall();
-      void AddWall(SDL_Point point);
+      void AddWall(SDL_Point &point);
       bool WallCell(int x, int y);
     private:
       std::size_t grid_width;
