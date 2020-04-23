@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "SDL.h"
+#include "wall.h"
 
 class Snake {
  public:
