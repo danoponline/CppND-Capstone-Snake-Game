@@ -1,6 +1,25 @@
 #include "wall.h"
 #include <iostream>
 
+// SDL Point Wrapper method implementation down here
+
+SDL_Point_Wrapper::SDL_Point_Wrapper(SDL_Point const &obj){
+    this->obj.x = obj.x;
+    this->obj.y = obj.y;
+}
+
+SDL_Point_Wrapper::SDL_Point_Wrapper(int x, int y){
+    obj.x = x;
+    obj.y = y;
+}
+
+bool SDL_Point_Wrapper::operator==(SDL_Point const &obj) const
+{
+    return (obj.x == this->obj.x && obj.y == this->obj.y);
+}
+
+// Wall method implementation down here
+
 Wall::Wall(std::size_t grid_width, std::size_t grid_height)
     : grid_width(grid_width),
       grid_height(grid_height){}
@@ -9,21 +28,18 @@ void Wall::AddWall()
 {
     if (wall_bodies.empty())
     {
-        growingDirection[0] = 1;
-        growingDirection[1] = 0;
+        growingDirection = {1,0};
         wall_bodies.emplace_back(currentWallHead);
         return;
-    } else if (wall_bodies.size() == grid_width)
+    } else if (upperRightCorner==wall_bodies.back())
     {
-        growingDirection[0] = 0;
-        growingDirection[1] = 1;
-    } else if (wall_bodies.size() == grid_width + grid_height - 1)
+        growingDirection = {0,1};
+    } else if (lowerRightCorner==wall_bodies.back())
     {
-        growingDirection[0] = -1;
-        growingDirection[1] = 0;
-    } else if (wall_bodies.size() == 2*grid_width + grid_height - 2){
-        growingDirection[0] = 0;
-        growingDirection[1] = -1;
+        growingDirection = {-1,0};
+    } else if (lowerLeftCorner==wall_bodies.back())
+    {
+        growingDirection = {0,-1};
     } else if (wall_bodies.size() >= 2*grid_width + 2* grid_height - 4){
         return;
     }
