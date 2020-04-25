@@ -3,7 +3,6 @@
 
 #include "SDL.h"
 #include <vector>
-#include <unordered_map>
 
 // add this SDL Point Wrapper class so that we can use == operator on SDL_Point object
 
@@ -29,12 +28,14 @@ class Wall
       std::vector<SDL_Point> GetWallBodies() const {return wall_bodies;}
       void AddWall();
       void AddWall(SDL_Point &point);
+      void RemoveWall();
       bool WallCell(int x, int y);
+      bool WallCell(SDL_Point &point);
     private:
-      SDL_Point_Wrapper upperLeftCorner{0,0};
-      SDL_Point_Wrapper upperRightCorner{static_cast<int>(grid_width-1),0};
-      SDL_Point_Wrapper lowerLeftCorner{0,static_cast<int>(grid_height-1)};
-      SDL_Point_Wrapper lowerRightCorner{static_cast<int>(grid_width-1),static_cast<int>(grid_height-1)};
+      SDL_Point_Wrapper upperLeftCorner;
+      SDL_Point_Wrapper upperRightCorner;
+      SDL_Point_Wrapper lowerLeftCorner;
+      SDL_Point_Wrapper lowerRightCorner;
       std::size_t grid_width;
       std::size_t grid_height;
       std::vector<int> growingDirection{1,0};

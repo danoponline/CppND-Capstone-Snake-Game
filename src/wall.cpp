@@ -15,6 +15,9 @@ SDL_Point_Wrapper::SDL_Point_Wrapper(int x, int y){
 
 bool SDL_Point_Wrapper::operator==(SDL_Point const &obj) const
 {
+    std::cout << "block: " << obj.x << "  " << obj.y << std::endl;
+    std::cout << "this obj " << this->obj.x << " " << this->obj.y << std::endl;
+
     return (obj.x == this->obj.x && obj.y == this->obj.y);
 }
 
@@ -22,15 +25,22 @@ bool SDL_Point_Wrapper::operator==(SDL_Point const &obj) const
 
 Wall::Wall(std::size_t grid_width, std::size_t grid_height)
     : grid_width(grid_width),
-      grid_height(grid_height){}
+      grid_height(grid_height),
+      upperLeftCorner(0,0),
+      upperRightCorner(static_cast<int>(grid_width-1),0),
+      lowerLeftCorner(0,static_cast<int>(grid_height-1)),
+      lowerRightCorner(static_cast<int>(grid_width-1),static_cast<int>(grid_height-1)){}
 
 void Wall::AddWall()
 {
     if (wall_bodies.empty())
     {
-        growingDirection = {1,0};
+        //growingDirection = {1,0}; // by default this is set at the beginning of the game
         wall_bodies.emplace_back(currentWallHead);
         return;
+    } else if (upperLeftCorner==wall_bodies.back())
+    {
+        growingDirection = {1,0};
     } else if (upperRightCorner==wall_bodies.back())
     {
         growingDirection = {0,1};
@@ -45,17 +55,35 @@ void Wall::AddWall()
     }
     currentWallHead.x += growingDirection[0];
     currentWallHead.y += growingDirection[1];
+    std::cout << (upperRightCorner==wall_bodies.back()) << std::endl;
     wall_bodies.emplace_back(currentWallHead);
 
 }
 
-void Wall::AddWall(SDL_Point &point){
+void Wall::AddWall(SDL_Point &point)
+{
     wall_bodies.emplace_back(point);
 }
 
-bool Wall::WallCell(int x, int y){
+void Wall::RemoveWall()
+{
+    wall_bodies.clear();
+}
+
+bool Wall::WallCell(int x, int y)
+{
     for (SDL_Point &point : wall_bodies){
         if (point.x == x && point.y == y){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Wall::WallCell(SDL_Point &pt)
+{
+    for (SDL_Point &point : wall_bodies){
+        if (point.x == pt.x && point.y == pt.y){
             return true;
         }
     }

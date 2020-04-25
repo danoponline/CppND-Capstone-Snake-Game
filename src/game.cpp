@@ -89,12 +89,18 @@ void Game::Update() {
     if(score%6==0 && score !=0)
     {
       bonus.Spawn();
+      while(wall.WallCell(bonus.GetBonusPosition().front()))
+      {
+        bonus.Kill();
+        bonus.Spawn();
+      }
+      
       bonus.ResetBonusTimeStart();
     }
     
     // Grow snake and increase speed.
-    snake.GrowBody();
-    snake.speed += 0.01;
+    //snake.GrowBody();
+    //snake.speed += 0.001;
   }
 
 
@@ -103,6 +109,7 @@ void Game::Update() {
     if (bonus.GetBonusPosition().front().x == new_x && bonus.GetBonusPosition().front().y == new_y)
     {
       snake.speed -= 2*0.01;
+      wall.RemoveWall();
       bonus.Kill();
     }
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - bonus.GetBonusTimeStart()).count() > 5000)
@@ -110,7 +117,6 @@ void Game::Update() {
       bonus.Kill();
     }
   }
-  
 }
 
 int Game::GetScore() const { return score; }
