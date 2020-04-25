@@ -18,7 +18,7 @@ class Bonus
     ~Bonus(){}
     void Spawn();
     void Kill();
-    std::vector<SDL_Point> GetBonusPosition() const {return _position;}
+    SDL_Point GetBonusPosition() const;
     bool isBonusSpawned() const {return !_position.empty();}
     void ResetBonusTimeStart() {_bonusTimeStart = std::chrono::system_clock::now();}
     auto GetBonusTimeStart() const {return _bonusTimeStart;}

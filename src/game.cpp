@@ -89,7 +89,7 @@ void Game::Update() {
     if(score%6==0 && score !=0)
     {
       bonus.Spawn();
-      while(wall.WallCell(bonus.GetBonusPosition().front()))
+      while(wall.WallCell(bonus.GetBonusPosition()))
       {
         bonus.Kill();
         bonus.Spawn();
@@ -106,7 +106,7 @@ void Game::Update() {
 
   // Check if there's bonus over here
   if (bonus.isBonusSpawned()){
-    if (bonus.GetBonusPosition().front().x == new_x && bonus.GetBonusPosition().front().y == new_y)
+    if (bonus.GetBonusPosition().x == new_x && bonus.GetBonusPosition().y == new_y)
     {
       snake.speed -= 2*0.01;
       wall.RemoveWall();

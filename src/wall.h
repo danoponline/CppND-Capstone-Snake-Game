@@ -14,8 +14,8 @@ class Wall
       void AddWall();
       void AddWall(SDL_Point &point);
       void RemoveWall();
-      bool WallCell(int x, int y);
-      bool WallCell(SDL_Point &point);
+      bool WallCell(int x, int y) const;
+      bool WallCell(SDL_Point const &point) const;
     private:
       SDL_Point upperLeftCorner;
       SDL_Point upperRightCorner;

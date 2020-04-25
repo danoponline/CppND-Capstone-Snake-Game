@@ -57,9 +57,9 @@ void Wall::RemoveWall()
     wall_bodies.clear();
 }
 
-bool Wall::WallCell(int x, int y)
+bool Wall::WallCell(int x, int y) const
 {
-    for (SDL_Point &point : wall_bodies){
+    for (SDL_Point point : wall_bodies){
         if (point.x == x && point.y == y){
             return true;
         }
@@ -67,9 +67,9 @@ bool Wall::WallCell(int x, int y)
     return false;
 }
 
-bool Wall::WallCell(SDL_Point &pt)
+bool Wall::WallCell(SDL_Point const &pt) const
 {
-    for (SDL_Point &point : wall_bodies){
+    for (SDL_Point point : wall_bodies){
         if (point.x == pt.x && point.y == pt.y){
             return true;
         }

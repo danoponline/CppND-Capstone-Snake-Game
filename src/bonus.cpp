@@ -22,3 +22,11 @@ void Bonus::Kill()
     _position.clear();
     return;
 }
+
+SDL_Point Bonus::GetBonusPosition() const
+{
+    SDL_Point point;
+    point.x =_position.front().x;
+    point.y = _position.front().y;
+    return point;
+}
