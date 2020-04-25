@@ -5,6 +5,7 @@
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
       wall(grid_width, grid_height),
+      bonus(grid_width, grid_height),
       grid_width(grid_width),
       grid_height(grid_height),
       engine(dev()),
@@ -28,7 +29,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food, wall);
+    renderer.Render(snake, food, wall, bonus);
 
     frame_end = SDL_GetTicks();
 
@@ -85,11 +86,26 @@ void Game::Update() {
     score++;
     wall.AddWall();
     PlaceFood();
+    if(score%3==0 && score !=0)
+    {
+      bonus.Spawn();
+    }
+    
     
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.01;
   }
+
+  // Check if there's bonus over here
+  if (bonus.isBonusSpawned()){
+    if (bonus.GetBonusPosition().front().x == new_x && bonus.GetBonusPosition().front().y == new_y)
+    {
+      snake.speed -= 0.01;
+      bonus.Kill();
+    }
+  }
+  
 }
 
 int Game::GetScore() const { return score; }

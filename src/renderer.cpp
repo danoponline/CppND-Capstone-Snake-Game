@@ -40,7 +40,7 @@ Renderer::~Renderer() {
   //SDL_Quit();
 }
 
-void Renderer::Render(Snake const &snake, SDL_Point const &food, Wall const &wall) {
+void Renderer::Render(Snake const &snake, SDL_Point const &food, Wall const &wall, Bonus const &bonus) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -62,6 +62,14 @@ void Renderer::Render(Snake const &snake, SDL_Point const &food, Wall const &wal
   block.x = food.x * block.w;
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer.get(), &block);
+
+  // Render bonus
+  SDL_SetRenderDrawColor(sdl_renderer.get(), 0, 255, 0, 255);
+  for (SDL_Point const &point : bonus.GetBonusPosition()) {
+    block.x = point.x * block.w;
+    block.y = point.y * block.h;
+    SDL_RenderFillRect(sdl_renderer.get(), &block);
+  }
 
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer.get(), 0xFF, 0xFF, 0xFF, 0xFF);

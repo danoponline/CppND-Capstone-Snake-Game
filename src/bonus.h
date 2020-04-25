@@ -14,7 +14,8 @@ class Bonus
     ~Bonus(){}
     void Spawn();
     void Kill();
-    std::vector<SDL_Point> getBonusPosition() const {return _position;}
+    std::vector<SDL_Point> GetBonusPosition() const {return _position;}
+    bool isBonusSpawned() const {return !_position.empty();}
 
   private:
     std::size_t _grid_width;

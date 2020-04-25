@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "snake.h"
 #include "wall.h"
+#include "bonus.h"
 
 class Game {
  public:
@@ -21,6 +22,7 @@ class Game {
   Snake snake;
   Wall wall;
   SDL_Point food;
+  Bonus bonus;
   std::size_t grid_width;
   std::size_t grid_height;
 
