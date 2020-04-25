@@ -40,7 +40,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count, food);
+      renderer.UpdateWindowTitle(score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -107,7 +107,7 @@ void Game::Update() {
   if (bonus.isBonusSpawned()){
     if (bonus.GetBonusPosition().x == new_x && bonus.GetBonusPosition().y == new_y)
     {
-      snake.speed -= 2*0.01;
+      snake.speed -= 3*0.01;
       wall.RemoveWall();
       bonus.Kill();
     }

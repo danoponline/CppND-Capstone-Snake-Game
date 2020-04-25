@@ -15,7 +15,7 @@ class Renderer {
   ~Renderer();
 
   void Render(Snake const &snake, SDL_Point const &food, Wall const &wall, Bonus const &bonus);
-  void UpdateWindowTitle(int score, int fps, SDL_Point &food);
+  void UpdateWindowTitle(int score, int fps);
 
  private:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> sdl_window;
