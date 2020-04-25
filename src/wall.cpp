@@ -15,9 +15,6 @@ SDL_Point_Wrapper::SDL_Point_Wrapper(int x, int y){
 
 bool SDL_Point_Wrapper::operator==(SDL_Point const &obj) const
 {
-    std::cout << "block: " << obj.x << "  " << obj.y << std::endl;
-    std::cout << "this obj " << this->obj.x << " " << this->obj.y << std::endl;
-
     return (obj.x == this->obj.x && obj.y == this->obj.y);
 }
 
@@ -55,7 +52,6 @@ void Wall::AddWall()
     }
     currentWallHead.x += growingDirection[0];
     currentWallHead.y += growingDirection[1];
-    std::cout << (upperRightCorner==wall_bodies.back()) << std::endl;
     wall_bodies.emplace_back(currentWallHead);
 
 }

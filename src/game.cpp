@@ -99,8 +99,8 @@ void Game::Update() {
     }
     
     // Grow snake and increase speed.
-    //snake.GrowBody();
-    //snake.speed += 0.001;
+    snake.GrowBody();
+    snake.speed += 0.01;
   }
 
 
