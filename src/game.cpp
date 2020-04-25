@@ -86,22 +86,27 @@ void Game::Update() {
     score++;
     wall.AddWall();
     PlaceFood();
-    if(score%3==0 && score !=0)
+    if(score%6==0 && score !=0)
     {
       bonus.Spawn();
+      bonus.ResetBonusTimeStart();
     }
-    
     
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.01;
   }
 
+
   // Check if there's bonus over here
   if (bonus.isBonusSpawned()){
     if (bonus.GetBonusPosition().front().x == new_x && bonus.GetBonusPosition().front().y == new_y)
     {
-      snake.speed -= 0.01;
+      snake.speed -= 2*0.01;
+      bonus.Kill();
+    }
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - bonus.GetBonusTimeStart()).count() > 5000)
+    {
       bonus.Kill();
     }
   }
