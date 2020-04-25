@@ -103,7 +103,6 @@ void Game::Update() {
     snake.speed += 0.01;
   }
 
-
   // Check if there's bonus over here
   if (bonus.isBonusSpawned()){
     if (bonus.GetBonusPosition().x == new_x && bonus.GetBonusPosition().y == new_y)
