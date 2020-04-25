@@ -1,32 +1,24 @@
 #include "wall.h"
 #include <iostream>
 
-// SDL Point Wrapper method implementation down here
+// Overload operator to compare SDL_Point
 
-SDL_Point_Wrapper::SDL_Point_Wrapper(SDL_Point const &obj){
-    this->obj.x = obj.x;
-    this->obj.y = obj.y;
-}
-
-SDL_Point_Wrapper::SDL_Point_Wrapper(int x, int y){
-    obj.x = x;
-    obj.y = y;
-}
-
-bool SDL_Point_Wrapper::operator==(SDL_Point const &obj) const
+bool operator==(SDL_Point const &obj1, SDL_Point const &obj2)
 {
-    return (obj.x == this->obj.x && obj.y == this->obj.y);
+    return (obj1.x == obj2.x && obj1.y == obj2.y);
 }
 
 // Wall method implementation down here
 
 Wall::Wall(std::size_t grid_width, std::size_t grid_height)
     : grid_width(grid_width),
-      grid_height(grid_height),
-      upperLeftCorner(0,0),
-      upperRightCorner(static_cast<int>(grid_width-1),0),
-      lowerLeftCorner(0,static_cast<int>(grid_height-1)),
-      lowerRightCorner(static_cast<int>(grid_width-1),static_cast<int>(grid_height-1)){}
+      grid_height(grid_height)
+{
+    upperLeftCorner = {0,0};
+    upperRightCorner = {static_cast<int>(grid_width-1),0};
+    lowerLeftCorner = {0,static_cast<int>(grid_height-1)};
+    lowerRightCorner = {static_cast<int>(grid_width-1),static_cast<int>(grid_height-1)};
+}
 
 void Wall::AddWall()
 {
@@ -53,7 +45,6 @@ void Wall::AddWall()
     currentWallHead.x += growingDirection[0];
     currentWallHead.y += growingDirection[1];
     wall_bodies.emplace_back(currentWallHead);
-
 }
 
 void Wall::AddWall(SDL_Point &point)
