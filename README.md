@@ -1,6 +1,6 @@
 # CPPND: Capstone Snake Game
 
-This is a fork repo from Udacity C++ Nanodegree Capstone. The snake can move freely on the screen and will grow and move faster every time it consumes food (yellow block). The snake will die if it hits itself or wall obstacle (grey block), which will grow every time the snake consume the food. There is a bonus block that will appear some time in the game that will last 5 sec. If the snake can consume the bonus, it will decrease its size, speed, and the wall will disappear. Have fun playing!
+This is a fork repo from Udacity C++ Nanodegree Capstone. The snake can move freely on the screen and will grow and move faster every time it consumes food (yellow block). The snake will die if it hits itself or wall obstacle (grey block), which will grow every time the snake consume the food. There is a bonus block that will appear some time in the game that will last 5 sec. If the snake can consume the bonus, it will decrease its speed and the wall will disappear. Have fun playing!
 
 <img src="snake_game.png"/>
 
